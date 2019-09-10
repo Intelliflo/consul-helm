@@ -1,0 +1,28 @@
+# Choose an optional name for the datacenter
+global:
+  #datacenter: minidc
+  image: "consul:1.6.0"
+# Enable the Consul Web UI via a NodePort
+ui:
+  enabled: true
+
+client:
+  enabled: true
+  grpc: true
+
+dns:
+  enabled: true
+
+syncCatalog:
+  enabled: true
+
+# Use only one Consul server for local development
+server:
+  nodeSelector: |
+    beta.kubernetes.io/os: linux
+  replicas: 1
+
+  bootstrapExpect: 1
+  disruptionBudget:
+    enabled: true
+    maxUnavailable: 0
